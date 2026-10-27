@@ -30,6 +30,7 @@ def open_port(port = SERIAL_PORT, baudrate = BAUD_RATE, timeout = 1):
 
     try:
         ser = serial.Serial(port=port, baudrate=baudrate, timeout=timeout)
+        ser.reset_input_buffer()
         return ser
     except serial.SerialException as e:
         print(f"Error opening serial port: {e}")
