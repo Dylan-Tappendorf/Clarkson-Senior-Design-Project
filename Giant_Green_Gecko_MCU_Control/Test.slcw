@@ -1,0 +1,7 @@
+---
+workspace_name: "Test"
+label: "Test"
+project:
+- id: "main"
+  path: "Giant_Green_Gecko_MCU_Control.slcp"
+  output: "."

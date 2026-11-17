@@ -13,10 +13,12 @@ Role:
 - Applies any necessary mathematical scaling or filtering.
 - Distributes the clean data to the UI ring buffer and the file writer queue.
 """
-header = settings.SYNC_HEADER  # Sync header for data validation
+header_format = f"BHIi"
+data_format = f"{settings.NUM_SAMPLES}h"
 
 if len(raw_data) == settings.BYTES_TO_READ:
-    data = np.frombuffer(raw_data, dtype="<u2")
+    header = struct.unpack(header_format, raw_data[:8])
+    data = struct.unpack(data_format, raw_data[8:])
     v_i = (data.astype(np.float32) * 3.3 / 4095.0) - 1.65
 
 
@@ -26,5 +28,3 @@ t = np.arange(N) * dt
 
 analitical_signal = signal.hilbert(v_i)
 phase = np.unwrap(np.angle(analitical_signal))
-phase_diff = np.diff(phase)
-

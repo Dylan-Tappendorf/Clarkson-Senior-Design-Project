@@ -19,4 +19,6 @@ from Config.settings import SERIAL_PORT, BAUD_RATE, BYTES_TO_READ, SYNC_HEADER
 
 
 
+
+
     
